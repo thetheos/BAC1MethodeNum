@@ -1,3 +1,6 @@
 {
-    "python.pythonPath": "/home/thatthetheos/anaconda3/envs/method_num/bin/python"
+    "python.pythonPath": "/home/thatthetheos/anaconda3/envs/method_num/bin/python",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+    
 }
