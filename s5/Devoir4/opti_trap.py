@@ -7,8 +7,8 @@ def trapezeEasy(f,a,b,n):
     
     i = linspace(a,b,int(n))
     U = f(i)
-    h = i[2] - i[1]
-    I = h/2 * (U[0] + U[-1] + 2 * sum(U[1:-1]))
+    h = (b-a)/n
+    I = h * (U[0]/2 + U[-1]/2 + sum(U[1:-1]))
     return I
   
 def trapezeFun(f,a,b,n,nmax,tol):
@@ -21,9 +21,10 @@ def trapezeFun(f,a,b,n,nmax,tol):
         n = n*2
         I1 = I2
         I2 = trapezeEasy(f,a,b,n)
-    
-    return I2,n,abs(I2-I1) 
+        print(I2)
 
+    return I2,n,abs(I2-I1) 
+"""
 def optimize_fun(f,a,b,n,nmax,tol):
     real_n_max = int(n * 2 **(round(log2(nmax/n))))
     
@@ -38,7 +39,7 @@ def optimize_fun(f,a,b,n,nmax,tol):
         I1 = trapezeEasy(f,a,b,real_n_max)
     
     return I2,real_n_max*2,abs(I2-I1) 
-    
+    """
 def u(x):
     return cos(x)
   
@@ -54,22 +55,14 @@ print("  Number of intervals = %d" % n)
 print("\n")
 
 
-I,n,errorEst = optimize_fun(u,a,b,n,200000,1e-12)
-errorExact = abs(1.0 - I)
-print(" ======= Integral of sinus between 0 and pi/2 = %21.14e " % I)
-print("  True error = %14.7e" % errorExact)
-print("  Est. error = %14.7e" % errorEst)
-print("  Number of intervals = %d" % n)
-
-n=10
-
-
 I,n,errorEst = trapezeFun(u,a,b,n,200000,1e-12)
 errorExact = abs(1.0 - I)
 print(" ======= Integral of sinus between 0 and pi/2 = %21.14e " % I)
 print("  True error = %14.7e" % errorExact)
 print("  Est. error = %14.7e" % errorEst)
 print("  Number of intervals = %d" % n)
+
+
  
  
  
