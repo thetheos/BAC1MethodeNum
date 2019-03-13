@@ -1,11 +1,10 @@
 from numpy import *
 
 def trapezeEasy(f,a,b,n):
-    
-    i = linspace(a,b,int(n))
+    i = linspace(a,b,n+1)
     U = f(i)
-    h = (b-a)/n
-    I = h * (U[0]/2 + U[-1]/2 + sum(U[1:-1]))
+    h = (b - a)/(n)
+    I = h * (U[0]/2 + U[-1]/2 +  sum(U[1:-1]))
     return I
   
 def trapezeFun(f,a,b,n,nmax,tol):

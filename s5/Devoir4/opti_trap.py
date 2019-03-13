@@ -4,11 +4,11 @@ from numpy import *
 import matplotlib.pyplot as plt
 
 def trapezeEasy(f,a,b,n):
-    
-    i = linspace(a,b,int(n))
+    i = linspace(a,b,n+1)
+    print(i.shape)
     U = f(i)
-    h = (b-a)/n
-    I = h * (U[0]/2 + U[-1]/2 + sum(U[1:-1]))
+    h = (b - a)/(n)
+    I = h * (U[0]/2 + U[-1]/2 +  sum(U[1:-1]))
     return I
   
 def trapezeFun(f,a,b,n,nmax,tol):
@@ -21,30 +21,15 @@ def trapezeFun(f,a,b,n,nmax,tol):
         n = n*2
         I1 = I2
         I2 = trapezeEasy(f,a,b,n)
-        print(I2)
-
+        print(abs(I2-I1))
     return I2,n,abs(I2-I1) 
-"""
-def optimize_fun(f,a,b,n,nmax,tol):
-    real_n_max = int(n * 2 **(round(log2(nmax/n))))
-    
-    I2 = trapezeEasy(f,a,b,real_n_max)
-    real_n_max = real_n_max / 2
-    I1 = trapezeEasy(f,a,b,real_n_max)
-    
-    while abs(I2-I1) < tol:
-        print(abs(I2-I1) )
-        real_n_max = real_n_max / 2
-        I2 = I1
-        I1 = trapezeEasy(f,a,b,real_n_max)
-    
-    return I2,real_n_max*2,abs(I2-I1) 
-    """
+
+
 def u(x):
     return cos(x)
   
 a = 0
-b = pi/2
+b = 1.57
 n = 10
  
 I = trapezeEasy(u,a,b,n)
@@ -55,7 +40,7 @@ print("  Number of intervals = %d" % n)
 print("\n")
 
 
-I,n,errorEst = trapezeFun(u,a,b,n,200000,1e-12)
+I,n,errorEst = trapezeFun(u,a,b,n,2000,1e-6)
 errorExact = abs(1.0 - I)
 print(" ======= Integral of sinus between 0 and pi/2 = %21.14e " % I)
 print("  True error = %14.7e" % errorExact)
