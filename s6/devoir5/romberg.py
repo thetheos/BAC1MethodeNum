@@ -14,8 +14,6 @@ def richard(I0 , I1 , j ):
 
 def romberg(f,a,b,n,nmax,tol):
     matrix = [[trapezeEasy(f,a,b,n)]]
-    print(trapezeEasy(f,a,b,n))
-    print(matrix)
     
     error = 1  #matrix[1][0] - matrix[0][0]
     
@@ -29,10 +27,7 @@ def romberg(f,a,b,n,nmax,tol):
             matrix[i].append(richard(matrix[i-1][it-1], matrix[i][it-1],it))
         
         error = abs(matrix[i][-1] - matrix[i][-2])
-        
         n = n*2
         i += 1
-    for elm in matrix:
-        print(elm)
     I = matrix[i-1][-1]
     return I,n,error
